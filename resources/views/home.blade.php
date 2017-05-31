@@ -9,11 +9,11 @@
 
                 <div class="panel-body">
                     @role('admin') 
-                        You are admin
+                        You are admin <br>
                     @endrole
 
                     @role('user.apis') 
-                        You are User
+                        You are User <br>
                     @endrole
                     You are logged in!
                 </div>
