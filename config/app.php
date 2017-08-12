@@ -165,6 +165,7 @@ return [
 
         //inluded package
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        // Fzaninoto\Faker\Providers\JWTAuthServiceProvider::class,
 
 
 

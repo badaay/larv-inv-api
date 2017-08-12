@@ -1,0 +1,1574 @@
+coba
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/app/ApiKey.php b/app/ApiKey.php
+new file mode 100644
+index 0000000..e895f83
+--- /dev/null
++++ b/app/ApiKey.php
+@@ -0,0 +1,18 @@
++<?php
++
++namespace App;
++
++use Illuminate\Database\Eloquent\Model;
++
++class ApiKey extends Model
++{
++    //
++     protected $fillable=[
++        'created_at',
++        'updated_at',
++        'secretkey',
++        'hit',
++        'status',
++        'id'
++    ];
++}
+diff --git a/app/Brands.php b/app/Brands.php
+new file mode 100644
+index 0000000..123e348
+--- /dev/null
++++ b/app/Brands.php
+@@ -0,0 +1,17 @@
++<?php
++
++namespace App;
++
++use Illuminate\Database\Eloquent\Model;
++
++class Brands extends Model
++{
++    protected $table = 'invento_brands';
++    //
++    protected $fillable=[
++        'created_at',
++        'updated_at',
++        'name',
++        'id'
++    ];
++}
+diff --git a/app/Categories.php b/app/Categories.php
+new file mode 100644
+index 0000000..bb92662
+--- /dev/null
++++ b/app/Categories.php
+@@ -0,0 +1,24 @@
++<?php
++
++namespace App;
++
++use Illuminate\Database\Eloquent\Model;
++// use Illuminate\Database\Eloquent\SoftDeletes;
++
++class Categories extends Model
++{
++    // use SoftDeletes;
++    //
++    protected $table = 'invento_categories';
++    protected $fillable=[
++        'created_at',
++        'updated_at',
++        'name',
++        'id'
++    ];
++
++    public function products()
++    {
++       return $this->hasMany('App\Products');
++    }
++}
+diff --git a/app/Http/Controllers/BrandsController.php b/app/Http/Controllers/BrandsController.php
+new file mode 100644
+index 0000000..a930b71
+--- /dev/null
++++ b/app/Http/Controllers/BrandsController.php
+@@ -0,0 +1,121 @@
++<?php
++
++namespace App\Http\Controllers;
++
++use App\Brands;
++use Illuminate\Http\Request;
++
++class BrandsController extends Controller
++{
++    /**
++     * Display a listing of the resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function index()
++    {
++        //
++    }
++
++    /**
++     * Show the form for creating a new resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function create()
++    {
++        //
++    }
++
++    /**
++     * Store a newly created resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @return \Illuminate\Http\Response
++     */
++    public function store(Request $request)
++    {
++        //
++        return Brands::create($request->all());
++    }
++
++    /**
++     * Display the specified resource.
++     *
++     * @param  \App\Brands  $brands
++     * @return \Illuminate\Http\Response
++     */
++    public function show($id)
++    {
++        //
++        return Brands::find($id);
++    }
++    /**
++     * Display the all resource.
++     *
++     * @param  \App\Brands  $brands
++     * @return \Illuminate\Http\Response
++     */
++    public function view($trash)
++    {
++        //
++        if($trash=='noTrash'){
++            return Brands::all();
++        }else if($trash=='withTrash'){
++            return Brands::withTrashed()->get();
++        }else if($trash=='trash'){
++            return Brands::onlyTrashed()->get();
++        }
++        
++    }
++
++    /**
++     * Show the form for editing the specified resource.
++     *
++     * @param  \App\Brands  $brands
++     * @return \Illuminate\Http\Response
++     */
++    public function edit($id)
++    {
++        //
++    }
++
++    /**
++     * Update the specified resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @param  \App\Brands  $brands
++     * @return \Illuminate\Http\Response
++     */
++    public function update(Request $request, $id)
++    {
++        //
++        // dd($request->all());
++        $brands = Brands::find($id);
++        if($brands)
++        {
++            if( $brands->update( $request->all() ) )
++            {
++                return $brands;
++            }
++            return array('failed to getting info from this value', $request->all());
++        }
++        return array('failed to getting info from this id', $id);
++        
++    }
++
++    /**
++     * Remove the specified resource from storage.
++     *
++     * @param  \App\Brands  $brands
++     * @return \Illuminate\Http\Response
++     */
++    public function destroy($id)
++    {
++        // return $brands->find();
++        //
++        $model = Brands::find($id);
++        $model->delete();
++        return $model;
++    }
++}
+diff --git a/app/Http/Controllers/CategoriesController.php b/app/Http/Controllers/CategoriesController.php
+new file mode 100644
+index 0000000..4b04726
+--- /dev/null
++++ b/app/Http/Controllers/CategoriesController.php
+@@ -0,0 +1,106 @@
++<?php
++
++namespace App\Http\Controllers;
++
++use App\Categories;
++use Illuminate\Http\Request;
++
++class CategoriesController extends Controller
++{
++    /**
++     * Display a listing of the resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function index()
++    {
++        //
++    }
++
++    /**
++     * Show the form for creating a new resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function create()
++    {
++        //
++    }
++
++    /**
++     * Store a newly created resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @return \Illuminate\Http\Response
++     */
++    public function store(Request $request)
++    {
++        //
++        // print_r($request);
++        return Categories::create($request->all());
++    }
++
++    /**
++     * Display the specified resource.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function show($id)
++    {
++        //
++    }
++
++    /**
++     * Display the specified resource.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function view($trash)
++    {
++        dd('hahah');
++        //
++         //
++        // if($trash=='noTrash'){
++            // return Categories::all();q
++        // }else if($trash=='withTrash'){
++        //     return Categories::withTrashed()->get();
++        // }else if($trash=='trash'){
++        //     return Categories::onlyTrashed()->get();
++        // }
++    }
++    /**
++     * Show the form for editing the specified resource.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function edit($id)
++    {
++        //
++    }
++
++    /**
++     * Update the specified resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function update(Request $request, $id)
++    {
++        //
++    }
++
++    /**
++     * Remove the specified resource from storage.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function destroy($id)
++    {
++        //
++    }
++}
+diff --git a/app/Http/Controllers/CobaController.php b/app/Http/Controllers/CobaController.php
+new file mode 100644
+index 0000000..8677d7e
+--- /dev/null
++++ b/app/Http/Controllers/CobaController.php
+@@ -0,0 +1,84 @@
++<?php
++
++namespace App\Http\Controllers;
++
++use Illuminate\Http\Request;
++
++class CobaController extends Controller
++{
++    /**
++     * Display a listing of the resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function index()
++    {
++        //
++    }
++
++    /**
++     * Show the form for creating a new resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function create()
++    {
++        //
++    }
++
++    /**
++     * Store a newly created resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @return \Illuminate\Http\Response
++     */
++    public function store(Request $request)
++    {
++        //
++    }
++
++    /**
++     * Display the specified resource.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function show($id)
++    {
++        //
++    }
++
++    /**
++     * Show the form for editing the specified resource.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function edit($id)
++    {
++        //
++    }
++
++    /**
++     * Update the specified resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function update(Request $request, $id)
++    {
++        //
++    }
++
++    /**
++     * Remove the specified resource from storage.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function destroy($id)
++    {
++        //
++    }
++}
+diff --git a/app/Http/Controllers/ProductsController.php b/app/Http/Controllers/ProductsController.php
+new file mode 100644
+index 0000000..879a6a6
+--- /dev/null
++++ b/app/Http/Controllers/ProductsController.php
+@@ -0,0 +1,124 @@
++<?php
++
++namespace App\Http\Controllers;
++
++use App\Products;
++use Illuminate\Http\Request;
++// use Response;
++// use App\Http\Requests;
++// use App\Http\Controllers\Response;
++
++class ProductsController extends Controller
++{
++    /**
++     * Display a listing of the resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function index()
++    {
++        //
++    }
++
++    /**
++     * Show the form for creating a new resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function create()
++    {
++        
++    }
++
++    /**
++     * Store a newly created resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @return \Illuminate\Http\Response
++     */
++    public function store(Request $request)
++    {
++        //
++        return Products::create($request->all());
++    }
++
++    /**
++     * Display the specified resource.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function show($id)
++    {
++        //
++        $products = Products::find($id);
++        dd($id);
++        // foreach ($products->categories  as $categories){
++        //     echo $categories;
++        // }
++        // return Products::find($id);
++    }
++    /**
++     * Display the all resource.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function view($trash=FALSE)
++    {
++        //
++        if($trash){
++            return Products::withTrashed()->get();
++        }
++        return Products::all();
++    }
++
++    /**
++     * Show the form for editing the specified resource.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function edit($id)
++    {
++        //
++    }
++
++    /**
++     * Update the specified resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function update(Request $request, $id)
++    {
++        //
++
++        $product = Products::find($id);
++        if($product){
++            if($product->update($request->all()) ){
++                return $product;
++            }
++        }
++       
++        return "this {$id} was not found";
++         
++        // return $request->all();
++    }
++
++    /**
++     * Remove the specified resource from storage.
++     *
++     * @param  int  $id
++     * @return \Illuminate\Http\Response
++     */
++    public function destroy($id)
++    {
++        $product = Products::find($id);
++
++        $product->delete();
++
++        //
++    }
++}
+diff --git a/app/Http/Controllers/SuppliersController.php b/app/Http/Controllers/SuppliersController.php
+new file mode 100644
+index 0000000..5b10df7
+--- /dev/null
++++ b/app/Http/Controllers/SuppliersController.php
+@@ -0,0 +1,85 @@
++<?php
++
++namespace App\Http\Controllers;
++
++use App\Suppliers;
++use Illuminate\Http\Request;
++
++class SuppliersController extends Controller
++{
++    /**
++     * Display a listing of the resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function index()
++    {
++        //
++    }
++
++    /**
++     * Show the form for creating a new resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function create()
++    {
++        //
++    }
++
++    /**
++     * Store a newly created resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @return \Illuminate\Http\Response
++     */
++    public function store(Request $request)
++    {
++        //
++    }
++
++    /**
++     * Display the specified resource.
++     *
++     * @param  \App\Suppliers  $suppliers
++     * @return \Illuminate\Http\Response
++     */
++    public function show(Suppliers $suppliers)
++    {
++        //
++    }
++
++    /**
++     * Show the form for editing the specified resource.
++     *
++     * @param  \App\Suppliers  $suppliers
++     * @return \Illuminate\Http\Response
++     */
++    public function edit(Suppliers $suppliers)
++    {
++        //
++    }
++
++    /**
++     * Update the specified resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @param  \App\Suppliers  $suppliers
++     * @return \Illuminate\Http\Response
++     */
++    public function update(Request $request, Suppliers $suppliers)
++    {
++        //
++    }
++
++    /**
++     * Remove the specified resource from storage.
++     *
++     * @param  \App\Suppliers  $suppliers
++     * @return \Illuminate\Http\Response
++     */
++    public function destroy(Suppliers $suppliers)
++    {
++        //
++    }
++}
+diff --git a/app/Http/Controllers/TestController.php b/app/Http/Controllers/TestController.php
+new file mode 100644
+index 0000000..c61c1cc
+--- /dev/null
++++ b/app/Http/Controllers/TestController.php
+@@ -0,0 +1,10 @@
++<?php
++
++namespace App\Http\Controllers;
++
++use Illuminate\Http\Request;
++
++class TestController extends Controller
++{
++    //
++}
+diff --git a/app/Http/Controllers/UserVendorController.php b/app/Http/Controllers/UserVendorController.php
+new file mode 100644
+index 0000000..73de004
+--- /dev/null
++++ b/app/Http/Controllers/UserVendorController.php
+@@ -0,0 +1,87 @@
++<?php
++
++namespace App\Http\Controllers;
++
++use App\UserVendor;
++use App\UserApps;
++use App\ApiKey;
++use Illuminate\Http\Request;
++
++class UserVendorController extends Controller
++{
++    /**
++     * Display a listing of the resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function index()
++    {
++        //
++    }
++
++    /**
++     * Show the form for creating a new resource.
++     *
++     * @return \Illuminate\Http\Response
++     */
++    public function create()
++    {
++        //
++    }
++
++    /**
++     * Store a newly created resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @return \Illuminate\Http\Response
++     */
++    public function store(Request $request)
++    {
++        //
++    }
++
++    /**
++     * Display the specified resource.
++     *
++     * @param  \App\UserVendor  $userVendor
++     * @return \Illuminate\Http\Response
++     */
++    public function show(UserVendor $userVendor)
++    {
++        //
++    }
++
++    /**
++     * Show the form for editing the specified resource.
++     *
++     * @param  \App\UserVendor  $userVendor
++     * @return \Illuminate\Http\Response
++     */
++    public function edit(UserVendor $userVendor)
++    {
++        //
++    }
++
++    /**
++     * Update the specified resource in storage.
++     *
++     * @param  \Illuminate\Http\Request  $request
++     * @param  \App\UserVendor  $userVendor
++     * @return \Illuminate\Http\Response
++     */
++    public function update(Request $request, UserVendor $userVendor)
++    {
++        //
++    }
++
++    /**
++     * Remove the specified resource from storage.
++     *
++     * @param  \App\UserVendor  $userVendor
++     * @return \Illuminate\Http\Response
++     */
++    public function destroy(UserVendor $userVendor)
++    {
++        //
++    }
++}
+diff --git a/app/Http/Middleware/VerifyCsrfToken.php b/app/Http/Middleware/VerifyCsrfToken.php
+index a2c3541..b88c938 100644
+--- a/app/Http/Middleware/VerifyCsrfToken.php
++++ b/app/Http/Middleware/VerifyCsrfToken.php
+@@ -13,5 +13,6 @@ class VerifyCsrfToken extends BaseVerifier
+      */
+     protected $except = [
+         //
++        'api/*',
+     ];
+ }
+diff --git a/app/Products.php b/app/Products.php
+new file mode 100644
+index 0000000..7f39488
+--- /dev/null
++++ b/app/Products.php
+@@ -0,0 +1,38 @@
++<?php
++
++namespace App;
++
++use Illuminate\Database\Eloquent\Model;
++use Illuminate\Database\Eloquent\SoftDeletes;
++
++class products extends Model
++{
++    use SoftDeletes;
++    //
++    protected $table = 'invento_products';
++    protected $fillable=[
++        'name', 
++        'description', 
++        'weight', 
++        'buy_price',
++        'sell_price', 
++        'stock',
++        'created_at',
++        'updated_at',
++        'deleted_at',
++        'name',
++        'id'
++    ];
++    public function productsStock()
++    {
++       return $this->hasMany('App\ProductsStock');
++    }
++    public function categories()
++    {
++        return $this->belongsTo('App\Categories');
++    }
++    public function suppliers()
++    {
++        return $this->belongsTo('App\Suppliers');
++    }
++}
+diff --git a/app/ProductsStock.php b/app/ProductsStock.php
+new file mode 100644
+index 0000000..3de7bfe
+--- /dev/null
++++ b/app/ProductsStock.php
+@@ -0,0 +1,25 @@
++<?php
++
++namespace App;
++
++use Illuminate\Database\Eloquent\Model;
++
++class ProductsStock extends Model
++{
++    //
++    protected $fillable=[
++        'created_at',
++        'updated_at',
++        'invento_products_id',
++        'invento_user_vendor',
++        'stock_in',
++        'stock_out',
++        'decription',
++        'id'
++    ];
++
++    public function products()
++    {
++       return $this->belongsTo('App\Products');
++    }
++}
+diff --git a/app/Suppliers.php b/app/Suppliers.php
+new file mode 100644
+index 0000000..3238c98
+--- /dev/null
++++ b/app/Suppliers.php
+@@ -0,0 +1,27 @@
++<?php
++
++namespace App;
++
++use Illuminate\Database\Eloquent\Model;
++
++class Suppliers extends Model
++{
++    //
++
++    protected $table = 'invento_suppliers';
++    protected $fillable=[
++        'created_at',
++        'updated_at',
++        'deleted_at',
++        'address',
++        'phone',
++        'phone_other',
++        'name',
++        'id'
++    ];
++
++    public function products()
++    {
++       return $this->hasMany('App\Products');
++    }
++}
+diff --git a/app/UserApps.php b/app/UserApps.php
+new file mode 100644
+index 0000000..0d73a2a
+--- /dev/null
++++ b/app/UserApps.php
+@@ -0,0 +1,22 @@
++<?php
++
++namespace App;
++
++use Illuminate\Database\Eloquent\Model;
++
++class UserApps extends Model
++{
++    //
++    protected $fillable=[
++        'name', 
++        'description', 
++        'tipe', 
++        'app_key',
++        'created_at',
++        'updated_at',
++        'deleted_at',
++        'name',
++        'id'
++    ];
++    
++}
+diff --git a/app/UserVendor.php b/app/UserVendor.php
+new file mode 100644
+index 0000000..9d9fdda
+--- /dev/null
++++ b/app/UserVendor.php
+@@ -0,0 +1,24 @@
++<?php
++
++namespace App;
++
++use Illuminate\Database\Eloquent\Model;
++
++class UserVendor extends Model
++{
++    //
++    protected $fillable=[
++        'name',
++        'created_at',
++        'updated_at',
++        'deleted_at',
++        'email',
++        'remember_token',
++        'address',
++        'phone',
++        'phone_other',
++        'id'
++    ];
++
++    protected $hidden=['password'];
++}
+diff --git a/composer.json b/composer.json
+index 780b789..f9a90e6 100644
+--- a/composer.json
++++ b/composer.json
+@@ -6,13 +6,13 @@
+     "type": "project",
+     "require": {
+         "php": ">=5.6.4",
++        "fzaninotto/faker": "^1.6",
+         "httpoz/roles": "^2.2",
+         "laravel/framework": "5.4.*",
+         "laravel/tinker": "~1.0",
+         "tymon/jwt-auth": "0.5.*"
+     },
+     "require-dev": {
+-        "fzaninotto/faker": "~1.4",
+         "mockery/mockery": "0.9.*",
+         "phpunit/phpunit": "~5.7"
+     },
+diff --git a/composer.lock b/composer.lock
+index 96fc9a4..6f6f3f6 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+         "This file is @generated automatically"
+     ],
+-    "content-hash": "deeb616fd41eb39dfaa9a1981c2bd9f1",
++    "content-hash": "db5698ead015d34f2287e91d249271ac",
+     "packages": [
+         {
+             "name": "dnoegel/php-xdg-base-dir",
+@@ -149,6 +149,54 @@
+             "time": "2017-03-29T16:04:15+00:00"
+         },
+         {
++            "name": "fzaninotto/faker",
++            "version": "v1.6.0",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/fzaninotto/Faker.git",
++                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/44f9a286a04b80c76a4e5fb7aad8bb539b920123",
++                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123",
++                "shasum": ""
++            },
++            "require": {
++                "php": "^5.3.3|^7.0"
++            },
++            "require-dev": {
++                "ext-intl": "*",
++                "phpunit/phpunit": "~4.0",
++                "squizlabs/php_codesniffer": "~1.5"
++            },
++            "type": "library",
++            "extra": {
++                "branch-alias": []
++            },
++            "autoload": {
++                "psr-4": {
++                    "Faker\\": "src/Faker/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "François Zaninotto"
++                }
++            ],
++            "description": "Faker is a PHP library that generates fake data for you.",
++            "keywords": [
++                "data",
++                "faker",
++                "fixtures"
++            ],
++            "time": "2016-04-29T12:21:54+00:00"
++        },
++        {
+             "name": "httpoz/roles",
+             "version": "v2.2.1",
+             "source": {
+@@ -2194,54 +2242,6 @@
+             "time": "2015-06-14T21:17:01+00:00"
+         },
+         {
+-            "name": "fzaninotto/faker",
+-            "version": "v1.6.0",
+-            "source": {
+-                "type": "git",
+-                "url": "https://github.com/fzaninotto/Faker.git",
+-                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123"
+-            },
+-            "dist": {
+-                "type": "zip",
+-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/44f9a286a04b80c76a4e5fb7aad8bb539b920123",
+-                "reference": "44f9a286a04b80c76a4e5fb7aad8bb539b920123",
+-                "shasum": ""
+-            },
+-            "require": {
+-                "php": "^5.3.3|^7.0"
+-            },
+-            "require-dev": {
+-                "ext-intl": "*",
+-                "phpunit/phpunit": "~4.0",
+-                "squizlabs/php_codesniffer": "~1.5"
+-            },
+-            "type": "library",
+-            "extra": {
+-                "branch-alias": []
+-            },
+-            "autoload": {
+-                "psr-4": {
+-                    "Faker\\": "src/Faker/"
+-                }
+-            },
+-            "notification-url": "https://packagist.org/downloads/",
+-            "license": [
+-                "MIT"
+-            ],
+-            "authors": [
+-                {
+-                    "name": "François Zaninotto"
+-                }
+-            ],
+-            "description": "Faker is a PHP library that generates fake data for you.",
+-            "keywords": [
+-                "data",
+-                "faker",
+-                "fixtures"
+-            ],
+-            "time": "2016-04-29T12:21:54+00:00"
+-        },
+-        {
+             "name": "hamcrest/hamcrest-php",
+             "version": "v1.2.2",
+             "source": {
+diff --git a/config/app.php b/config/app.php
+index 851ab98..f06fc64 100644
+--- a/config/app.php
++++ b/config/app.php
+@@ -165,6 +165,7 @@ return [
+ 
+         //inluded package
+         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
++        // Fzaninoto\Faker\Providers\JWTAuthServiceProvider::class,
+ 
+ 
+ 
+diff --git a/config/setting.php b/config/setting.php
+new file mode 100644
+index 0000000..954d238
+--- /dev/null
++++ b/config/setting.php
+@@ -0,0 +1,8 @@
++<?php
++
++return [
++
++
++    'prefix' => 'invento_',
++
++];
+diff --git a/database/migrations/2017_07_23_122833_CreateTableUserApps.php b/database/migrations/2017_07_23_122833_CreateTableUserApps.php
+new file mode 100644
+index 0000000..097f21e
+--- /dev/null
++++ b/database/migrations/2017_07_23_122833_CreateTableUserApps.php
+@@ -0,0 +1,40 @@
++<?php
++
++use Illuminate\Support\Facades\Schema;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Database\Migrations\Migration;
++
++class CreateTableUserApps extends Migration
++{
++    /**
++     * Run the migrations.
++     *
++     * @return void
++     */
++    public function up()
++    {
++        //
++
++         Schema::create('invento_user_apps', function (Blueprint $table) {
++            $table->increments('id');
++            $table->timestamps();
++            $table->softDeletes();
++            $table->string('name');
++            $table->string('description');
++            $table->string('tipe'); //mobile//desktop//web
++            $table->string('app_key');
++        });
++    }
++
++    /**
++     * Reverse the migrations.
++     *
++     * @return void
++     */
++    public function down()
++    {
++        Schema::dropIfExists('invento_user_apps');
++
++        //
++    }
++}
+diff --git a/database/migrations/2017_07_23_123618_CreateTableUserVendor.php b/database/migrations/2017_07_23_123618_CreateTableUserVendor.php
+new file mode 100644
+index 0000000..a903f99
+--- /dev/null
++++ b/database/migrations/2017_07_23_123618_CreateTableUserVendor.php
+@@ -0,0 +1,43 @@
++<?php
++
++use Illuminate\Support\Facades\Schema;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Database\Migrations\Migration;
++
++class CreateTableUserVendor extends Migration
++{
++    /**
++     * Run the migrations.
++     *
++     * @return void
++     */
++    public function up()
++    {
++        //
++
++         Schema::create('invento_user_vendor', function (Blueprint $table) {
++            $table->increments('id');
++            $table->timestamps();
++            $table->softDeletes();
++            $table->string('name');
++            $table->string('email')->unique();
++            $table->string('password');
++            $table->rememberToken();
++            $table->string('address')->nullable();
++            $table->string('phone')->nullable();
++            $table->string('phone_other')->nullable();
++        });
++    }
++
++    /**
++     * Reverse the migrations.
++     *
++     * @return void
++     */
++    public function down()
++    {
++        Schema::dropIfExists('invento_user_vendor');
++
++        //
++    }
++}
+diff --git a/database/migrations/2017_07_23_124710_CreateTableCategories.php b/database/migrations/2017_07_23_124710_CreateTableCategories.php
+new file mode 100644
+index 0000000..95e4e28
+--- /dev/null
++++ b/database/migrations/2017_07_23_124710_CreateTableCategories.php
+@@ -0,0 +1,34 @@
++<?php
++
++use Illuminate\Support\Facades\Schema;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Database\Migrations\Migration;
++
++class CreateTableCategories extends Migration
++{
++    /**
++     * Run the migrations.
++     *
++     * @return void
++     */
++    public function up()
++    {
++         Schema::create('invento_categories', function (Blueprint $table) {
++            $table->increments('id');
++            $table->timestamps();
++            $table->string('name',155)->nullable();
++        });
++    }
++
++    /**
++     * Reverse the migrations.
++     *
++     * @return void
++     */
++    public function down()
++    {
++        //
++        Schema::dropIfExists('invento_categories');
++
++    }
++}
+diff --git a/database/migrations/2017_07_23_124733_CreateTableApiKey.php b/database/migrations/2017_07_23_124733_CreateTableApiKey.php
+new file mode 100644
+index 0000000..16fef7a
+--- /dev/null
++++ b/database/migrations/2017_07_23_124733_CreateTableApiKey.php
+@@ -0,0 +1,37 @@
++<?php
++
++use Illuminate\Support\Facades\Schema;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Database\Migrations\Migration;
++
++class CreateTableApiKey extends Migration
++{
++    /**
++     * Run the migrations.
++     *
++     * @return void
++     */
++    public function up()
++    {
++        //
++        Schema::create('invento_apikey', function (Blueprint $table) {
++            $table->increments('id');
++            $table->timestamps();
++            $table->string('secretkey')->nullable();
++            $table->integer('hit')->nullable();
++            $table->string('status',25)->default('active');            
++        });
++    }
++
++    /**
++     * Reverse the migrations.
++     *
++     * @return void
++     */
++    public function down()
++    {
++        //
++        Schema::drop('invento_apikey');
++
++    }
++}
+diff --git a/database/migrations/2017_07_23_124903_CreateTableSuppliers.php b/database/migrations/2017_07_23_124903_CreateTableSuppliers.php
+new file mode 100644
+index 0000000..3b33be3
+--- /dev/null
++++ b/database/migrations/2017_07_23_124903_CreateTableSuppliers.php
+@@ -0,0 +1,39 @@
++<?php
++
++use Illuminate\Support\Facades\Schema;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Database\Migrations\Migration;
++
++class CreateTableSuppliers extends Migration
++{
++    /**
++     * Run the migrations.
++     *
++     * @return void
++     */
++    public function up()
++    {
++        //
++        Schema::create('invento_suppliers', function (Blueprint $table) {
++            $table->increments('id');
++            $table->timestamps();
++            $table->softDeletes();
++            $table->string('name')->nullable();
++            $table->string('address')->nullable();
++            $table->string('phone')->nullable();
++            $table->string('phone_other')->nullable();
++        });
++                                                                                           
++    }
++
++    /**
++     * Reverse the migrations.
++     *
++     * @return void
++     */
++    public function down()
++    {
++        //
++        Schema::dropIfExists('invento_suppliers');
++    }
++}
+diff --git a/database/migrations/2017_07_23_125034_CreateTableBrands.php b/database/migrations/2017_07_23_125034_CreateTableBrands.php
+new file mode 100644
+index 0000000..dab4115
+--- /dev/null
++++ b/database/migrations/2017_07_23_125034_CreateTableBrands.php
+@@ -0,0 +1,35 @@
++<?php
++
++use Illuminate\Support\Facades\Schema;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Database\Migrations\Migration;
++
++class CreateTableBrands extends Migration
++{
++    /**
++     * Run the migrations.
++     *
++     * @return void
++     */
++    public function up()
++    {
++        //
++        Schema::create('invento_brands', function (Blueprint $table) {
++            $table->increments('id');
++            $table->timestamps();
++            $table->softDeletes();
++            $table->string('name')->nullable();
++        });
++    }
++
++    /**
++     * Reverse the migrations.
++     *
++     * @return void
++     */
++    public function down()
++    {
++        //
++        Schema::dropIfExists('invento_brands');
++    }
++}
+diff --git a/database/migrations/2017_07_23_125105_CreateTableProducts.php b/database/migrations/2017_07_23_125105_CreateTableProducts.php
+new file mode 100644
+index 0000000..f17d260
+--- /dev/null
++++ b/database/migrations/2017_07_23_125105_CreateTableProducts.php
+@@ -0,0 +1,44 @@
++<?php
++
++use Illuminate\Support\Facades\Schema;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Database\Migrations\Migration;
++
++class CreateTableProducts extends Migration
++{
++    /**
++     * Run the migrations.
++     *
++     * @return void
++     */
++    public function up()
++    {
++        //
++         Schema::create('invento_products', function (Blueprint $table) {
++            $table->increments('id');
++            $table->timestamps();
++            $table->softDeletes();
++            $table->integer('invento_categories_id')->nullable();
++            $table->integer('invento_suppliers_id')->nullable();
++            $table->string('name')->nullable();
++            $table->text('description')->nullable();
++            $table->double('weight')->default(0);
++            $table->double('buy_price');
++            $table->double('sell_price');
++            $table->integer('stock')->default(0);
++
++        });
++    }
++
++    /**
++     * Reverse the migrations.
++     *
++     * @return void
++     */
++    public function down()
++    {
++        //
++        Schema::dropIfExists('invento_products');
++
++    }
++}
+diff --git a/database/migrations/2017_07_23_125424_CreateTableProductsStock.php b/database/migrations/2017_07_23_125424_CreateTableProductsStock.php
+new file mode 100644
+index 0000000..e014267
+--- /dev/null
++++ b/database/migrations/2017_07_23_125424_CreateTableProductsStock.php
+@@ -0,0 +1,41 @@
++<?php
++
++use Illuminate\Support\Facades\Schema;
++use Illuminate\Database\Schema\Blueprint;
++use Illuminate\Database\Migrations\Migration;
++
++class CreateTableProductsStock extends Migration
++{
++    /**
++     * Run the migrations.
++     *
++     * @return void
++     */
++    public function up()
++    {
++        //
++        Schema::create('invento_products_stock', function (Blueprint $table) {
++            $table->increments('id');
++            $table->timestamps();
++            
++            $table->integer('invento_products_id')->unsigned();
++
++            $table->integer('invento_user_vendor')->nullable();
++            $table->integer('stock_in')->default(0);
++            $table->integer('stock_out')->default(0);
++            $table->string('description')->nullable();
++        });
++    }
++
++    /**
++     * Reverse the migrations.
++     *
++     * @return void
++     */
++    public function down()
++    {
++        //
++    Schema::dropIfExists('invento_products_stock');
++
++    }
++}
+diff --git a/database/seeds/CategpriesSeeder.php b/database/seeds/CategpriesSeeder.php
+new file mode 100644
+index 0000000..c59f47a
+--- /dev/null
++++ b/database/seeds/CategpriesSeeder.php
+@@ -0,0 +1,16 @@
++<?php
++
++use Illuminate\Database\Seeder;
++
++class CategpriesSeeder extends Seeder
++{
++    /**
++     * Run the database seeds.
++     *
++     * @return void
++     */
++    public function run()
++    {
++        //
++    }
++}
+diff --git a/database/seeds/DatabaseSeeder.php b/database/seeds/DatabaseSeeder.php
+index 149a89e..187bcd9 100644
+--- a/database/seeds/DatabaseSeeder.php
++++ b/database/seeds/DatabaseSeeder.php
+@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
+     {
+         // $this->call(UsersTableSeeder::class);
+         //  $this->call(UserRoleSeeder::class);
+-         $this->call(UsersTableSeeder::class);
++        //  $this->call(UsersTableSeeder::class);
++         $this->call(SupplierSeeder::class);
+     }
+ }
+diff --git a/database/seeds/SupplierSeeder.php b/database/seeds/SupplierSeeder.php
+new file mode 100644
+index 0000000..298cce1
+--- /dev/null
++++ b/database/seeds/SupplierSeeder.php
+@@ -0,0 +1,28 @@
++<?php
++
++use Illuminate\Database\Seeder;
++use App\Suppliers;
++use Faker\Factory as faker;
++class SupplierSeeder extends Seeder
++{
++    /**
++     * Run the database seeds.
++     *
++     * @return void
++     */
++    public function run()
++    {
++        //
++
++        $faker = Faker::create('id_ID');
++        $i = 100;
++        while($i!=0){
++            $data['name'] = $faker->name;
++            $data['phone'] = $faker->phoneNumber;
++            $data['address'] = $faker->address;
++            $data['phone_other'] = $faker->phoneNumber;
++            Suppliers::create($data);
++            $i--;
++        }
++    }
++}
+diff --git a/routes/api.php b/routes/api.php
+index 6926e94..c1ba0bb 100644
+--- a/routes/api.php
++++ b/routes/api.php
+@@ -22,3 +22,23 @@ Route::post('auth/login', 'UserController@login');
+ Route::group(['middleware' => 'jwt.auth'], function () {
+     Route::get('user', 'UserController@getAuthUser');
+ });
++
++// Route::post('/test', 'ProductsController@store');
++// Route::resource('products', 'ProductsController');
++// Route::get('products/{id}', function ($id) {
++//     return array(
++//       1 => "expertphp",
++//       2 => "demo"
++//     );
++// });
++Route::resource('/products', 'ProductsController');
++Route::post('/products', 'ProductsController@store');
++Route::get('/products/view/{trash}', 'ProductsController@view');
++
++Route::resource('/brands', 'BrandsController');
++Route::post('/brands', 'BrandsController@store');
++Route::get('/brands/view/{trash}', 'BrandsController@view');
++
++Route::resource('/categories', 'CategoriesController');
++Route::post('/categories', 'CategoriesController@store');
++Route::get('/categories/view', 'CategoriesController@view');
+\ No newline at end of file
+diff --git a/routes/web.php b/routes/web.php
+index 1eea89b..f6b2e93 100644
+--- a/routes/web.php
++++ b/routes/web.php
+@@ -20,3 +20,22 @@ Route::get('/token', 'AuthenticateController@makeToken');
+ Auth::routes();
+ 
+ Route::get('/home', 'HomeController@index')->name('home');
++
++// Route::resource('products', 'ProductsController');
++Route::put('/test', 'ProductsController@store');
++
++Route::get('/faker', function(){
++  
++    $faker = Faker\Factory::create('id_ID');
++
++    for($i=0;$i<10;$i++){
++        $tmp['name'] = $faker->name;
++        $tmp['phone'] = $faker->phoneNumber;
++        $tmp['address'] = $faker->address;
++        $tmp['phone_other'] = $faker->phoneNumber;
++        
++        $data[] = $tmp;
++        // Supplier::create($data);
++    }
++    return $data;
++});
+\ No newline at end of file

@@ -22,3 +22,23 @@ Route::post('auth/login', 'UserController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user', 'UserController@getAuthUser');
 });
+
+// Route::post('/test', 'ProductsController@store');
+// Route::resource('products', 'ProductsController');
+// Route::get('products/{id}', function ($id) {
+//     return array(
+//       1 => "expertphp",
+//       2 => "demo"
+//     );
+// });
+Route::resource('/products', 'ProductsController');
+Route::post('/products', 'ProductsController@store');
+Route::get('/products/view/{trash}', 'ProductsController@view');
+
+Route::resource('/brands', 'BrandsController');
+Route::post('/brands', 'BrandsController@store');
+Route::get('/brands/view/{trash}', 'BrandsController@view');
+
+Route::resource('/categories', 'CategoriesController');
+Route::post('/categories', 'CategoriesController@store');
+Route::get('/categories/view', 'CategoriesController@view');
