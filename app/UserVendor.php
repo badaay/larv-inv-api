@@ -2,23 +2,23 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class UserVendor extends Model
+use HttpOz\Roles\Traits\HasRole;
+use HttpOz\Roles\Contracts\HasRole as HasRoleContract;
+
+class UserVendor extends Authenticatable implements HasRoleContract
 {
+    use Notifiable, HasRole;
     //
+    protected $table = 'invento_user_vendor';
     protected $fillable=[
         'name',
-        'created_at',
-        'updated_at',
-        'deleted_at',
         'email',
-        'remember_token',
-        'address',
-        'phone',
-        'phone_other',
-        'id'
+        'password',
+
     ];
 
-    protected $hidden=['password'];
+    protected $hidden=['password','remember_token'];
 }

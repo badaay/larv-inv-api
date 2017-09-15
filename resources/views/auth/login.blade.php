@@ -59,10 +59,15 @@
                                 </a>
                             </div>
                         </div>
+
+                        <a href="{{url('/redirect')}}" class="btn btn-primary">Login with Facebook</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+  
+
+
 @endsection

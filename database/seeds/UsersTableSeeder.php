@@ -16,11 +16,11 @@ class UsersTableSeeder extends Seeder
         $moderatorRole = \HttpOz\Roles\Models\Role::whereSlug('user.apis')->first();
 
         // 2a. Create admin
-        // $admin = \App\User::create([
-        //     'name' => 'Oscar Mwanandimai',
-        //     'email' => 'oscar@github.com',
-        //     'password' => bcrypt('password')
-        // ]);
+        $admin = \App\User::create([
+            'name' => 'bagus hidayat',
+            'email' => 'bagus@mail.com',
+            'password' => bcrypt('password')
+        ]);
         $admin = \App\User::where('email', 'bagus@mail.com')->first();
 
         // 2b. Create forum moderator
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         //     'password' => bcrypt('password')
         // ]);
 
-        $user = \App\User::where('email', 'userjwt@token.com')->first();
+        $user = \App\User::where('email', 'tobuku@mail.com')->first();
 
         // 3. Attach a role to the user object / assign a role to a user
         $admin->attachRole($adminRole);

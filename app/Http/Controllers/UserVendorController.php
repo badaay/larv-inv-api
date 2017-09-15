@@ -6,6 +6,8 @@ use App\UserVendor;
 use App\UserApps;
 use App\ApiKey;
 use Illuminate\Http\Request;
+// use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
 
 class UserVendorController extends Controller
 {
@@ -16,7 +18,7 @@ class UserVendorController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -38,6 +40,15 @@ class UserVendorController extends Controller
     public function store(Request $request)
     {
         //
+
+        $apps = new UserApps;
+        $apps->name = $request->name;
+        $apps->user_id = Auth::id();
+        $apps->description = $request->description;
+        $apps->app_key = substr(md5('invento'),0, 5).substr(md5($request->name),0, 5).substr(md5($request->_token.uniqid()), 15);
+        $apps->tipe = $request->type;
+        $apps->save();
+        return $apps;
     }
 
     /**
@@ -80,8 +91,12 @@ class UserVendorController extends Controller
      * @param  \App\UserVendor  $userVendor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserVendor $userVendor)
+    public function destroy($id)
     {
-        //
+        $apps = UserApps::find($id);
+
+        $apps->delete();
+
+        return redirect('setting');
     }
 }

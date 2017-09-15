@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class products extends Model
 {
     use SoftDeletes;
+
+    // protected $prefix = ;
     //
-    protected $table = 'invento_products';
+    protected $table = "invento_products";
     protected $fillable=[
         'name', 
         'description', 

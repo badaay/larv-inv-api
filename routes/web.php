@@ -19,7 +19,21 @@ Route::get('/token', 'AuthenticateController@makeToken');
 
 Auth::routes();
 
+Route::get('/redirect', 'SocialAuthFacebookController@redirect');
+Route::get('/callback', 'SocialAuthFacebookController@callback');
+
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/setting', 'SettingController@index')->name('setting');
+
+// Route::prefix('services')->group( function(){
+    // Route::post('/add_apps', [
+    //         'as' => '/add_apps',
+    //         'uses' => 'UserVendorController@store',
+    //     ]);
+
+Route::resource('/application', 'UserVendorController');
+
+// });
 
 // Route::resource('products', 'ProductsController');
 Route::put('/test', 'ProductsController@store');

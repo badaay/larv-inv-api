@@ -34,6 +34,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 Route::resource('/products', 'ProductsController');
 Route::post('/products', 'ProductsController@store');
 Route::get('/products/view/{trash}', 'ProductsController@view');
+Route::put('/products/stok/{id}', 'ProductsController@insert_stock');
 
 Route::resource('/brands', 'BrandsController');
 Route::post('/brands', 'BrandsController@store');
@@ -42,3 +43,8 @@ Route::get('/brands/view/{trash}', 'BrandsController@view');
 Route::resource('/categories', 'CategoriesController');
 Route::post('/categories', 'CategoriesController@store');
 Route::get('/categories/view', 'CategoriesController@view');
+
+    Route::post('/add_apps', [
+            'as' => '/api/add_apps',
+            'uses' => 'UserVendorController@store',
+        ]);

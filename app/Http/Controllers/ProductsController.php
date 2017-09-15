@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Products;
+use App\ProductsStock as Stock;
 use Illuminate\Http\Request;
-// use Response;
-// use App\Http\Requests;
-// use App\Http\Controllers\Response;
+
 
 class ProductsController extends Controller
 {
@@ -52,11 +51,15 @@ class ProductsController extends Controller
     {
         //
         $products = Products::find($id);
-        dd($id);
-        // foreach ($products->categories  as $categories){
-        //     echo $categories;
-        // }
-        // return Products::find($id);
+        
+        // $data = $products;
+        // $data['categories'] = $products->categories;
+        // $data['suppliers'] = $products->suppliers; 
+
+        // echo $products->categories;
+        // echo $products->suppliers;
+
+        return $products;
     }
     /**
      * Display the all resource.
@@ -103,6 +106,36 @@ class ProductsController extends Controller
         }
        
         return "this {$id} was not found";
+         
+        // return $request->all();
+    }
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id id_product
+     * @return \Illuminate\Http\Response
+     */
+    public function insert_stock(Request $request, $id)
+    {
+        //
+
+        print_r($request);
+        
+
+        $product = Products::find($id);
+
+        print_r($product);
+        // if($product){
+
+        //     if($product->update($request->all()) ){
+        //        $stok = Stock::create($request->all());
+        //     }
+
+        // }
+       
+        // return "this {$id} was not found";
          
         // return $request->all();
     }

@@ -3,6 +3,6 @@
 return [
 
 
-    'prefix' => 'invento_',
+    'prefix' => 'invento',
 
 ];

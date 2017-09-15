@@ -19,8 +19,10 @@ class CreateTableProducts extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->integer('invento_categories_id')->nullable();
+            $table->integer('invento_vendor_id')->nullable();
             $table->integer('invento_suppliers_id')->nullable();
             $table->string('name')->nullable();
+            $table->string('sku')->nullable();
             $table->text('description')->nullable();
             $table->double('weight')->default(0);
             $table->double('buy_price');

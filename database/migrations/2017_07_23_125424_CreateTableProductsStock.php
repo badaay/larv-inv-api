@@ -17,13 +17,12 @@ class CreateTableProductsStock extends Migration
         Schema::create('invento_products_stock', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            
             $table->integer('invento_products_id')->unsigned();
-
             $table->integer('invento_user_vendor')->nullable();
             $table->integer('stock_in')->default(0);
             $table->integer('stock_out')->default(0);
             $table->string('description')->nullable();
+            $table->string('sku')->nullable();
         });
     }
 
