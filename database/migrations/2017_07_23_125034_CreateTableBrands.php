@@ -14,6 +14,7 @@ class CreateTableBrands extends Migration
     public function up()
     {
         //
+        Schema::dropIfExists('invento_brands');
         Schema::create('invento_brands', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();

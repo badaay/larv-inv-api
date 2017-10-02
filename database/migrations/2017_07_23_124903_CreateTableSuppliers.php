@@ -14,6 +14,7 @@ class CreateTableSuppliers extends Migration
     public function up()
     {
         //
+        Schema::dropIfExists('invento_suppliers');
         Schema::create('invento_suppliers', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();

@@ -14,6 +14,7 @@ class CreateTableUserApps extends Migration
     public function up()
     {
         //
+        Schema::dropIfExists('invento_user_apps');
 
          Schema::create('invento_user_apps', function (Blueprint $table) {
             $table->increments('id');

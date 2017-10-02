@@ -13,6 +13,7 @@ class CreateTableCategories extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('invento_categories');
          Schema::create('invento_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();

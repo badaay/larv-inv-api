@@ -14,6 +14,7 @@ class CreateTableProductsStock extends Migration
     public function up()
     {
         //
+        Schema::dropIfExists('invento_products_stock');
         Schema::create('invento_products_stock', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
@@ -34,7 +35,7 @@ class CreateTableProductsStock extends Migration
     public function down()
     {
         //
-    Schema::dropIfExists('invento_products_stock');
+        Schema::dropIfExists('invento_products_stock');
 
     }
 }

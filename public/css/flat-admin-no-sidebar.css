@@ -1778,7 +1778,7 @@ body {
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    padding-left: 180px; }
+ }
     body .app-container .content-heading {
       margin-bottom: 30px; }
       body .app-container .content-heading .title {
@@ -2544,7 +2544,7 @@ aside.app-sidebar {
       height: 90px;
       font-size: 1.2em;
       font-weight: 300;
-      color: #FFF; }
+      color: #444; }
       aside.app-sidebar .sidebar-header .sidebar-brand .highlight {
         padding: 2px 5px;
         font-weight: 200;
@@ -2934,7 +2934,7 @@ aside.app-sidebar {
 
 
 aside.app-sidebar {
-  background-color: #0a2513; }
+  background-color: #FFF; }
   aside.app-sidebar .sidebar-header .sidebar-brand .highlight {
     background-color: #29c75f; }
   aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .icon {
@@ -4103,30 +4103,6 @@ ui-view > .app-messaging-container {
     .card.card-yellow.card-chart .card-header {
       background-color: #FFBC11;
       color: #FFBC11; }
-  .card.card-red {
-    background-color: #e74c3c; }
-    .card.card-red .card-body .icon {
-      color: #FFF;
-      background-color: rgba(255, 255, 255, 0.05); }
-    .card.card-red .card-body .content .value {
-      color: #FFF; }
-    .card.card-red-light {
-      background-color: #FFF; }
-      .card.card-red-light .card-body .icon {
-        color: #e74c3c;
-        background-color: rgba(255, 188, 17, 0.05); }
-      .card.card-red-light .card-body .content .value {
-        color: #e74c3c; }
-      .card.card-red-light:hover {
-        background-color: #e74c3c; }
-        .card.card-red-light:hover .card-body .icon {
-          color: #FFF;
-          background-color: rgba(255, 255, 255, 0.1); }
-        .card.card-red-light:hover .card-body .content .title, .card.card-red-light:hover .card-body .content .value {
-          color: #FFF; }
-    .card.card-red.card-chart .card-header {
-      background-color: #e74c3c;
-      color: #e74c3c; }
 
 @media (max-width: 767px) {
   .card .card-header {
@@ -5495,7 +5471,8 @@ pre {
   border-radius: 0;
   border: 0; }
   pre code.hljs {
-    padding: 30px; }
+    /*padding: 30px; */
+  }
 
 .list-group {
   position: relative; }
@@ -5530,7 +5507,7 @@ pre {
     padding-left: 40px;
     color: #18aa4a; }
     .list-group.__timeline > .list-group-item:after {
-      content: '';
+      /*content: '';*/
       z-index: 1;
       position: absolute;
       display: block;
@@ -5803,3 +5780,8 @@ footer.app-footer {
     font-size: 0.9em; }
   .media.social-post .media-body .media-comment input {
     padding: 7.5px 15px; }
+
+  .table thead {
+    background-color: #282b2e;
+    color: #f5f5f5;
+  }

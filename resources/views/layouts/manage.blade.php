@@ -10,13 +10,13 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/flat-admin.css') }}">
         <!-- Theme -->
-        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/blue-sky.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/blue.css') }}"> -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/red.css') }}">
+        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/blue-sky.css') }}"> -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/blue.css') }}">
+        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/red.css') }}"> -->
         <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/yellow.css') }}"> -->
     </head>
     <body>
-        <div class="app app-red">
+        <div class="app app-blue">
             <aside class="app-sidebar" id="sidebar">
                 <div class="sidebar-header">
                     <a class="sidebar-brand" href="#"><span class="highlight">{{ config('app.name') }}</span> Admin</a>
@@ -31,17 +31,53 @@
                                 <div class="icon">
                                     <i class="fa fa-tasks" aria-hidden="true"></i>
                                 </div>
-                                <div class="title">Dashboard</div>
+                                <div class="title">Chart</div>
                             </a>
                         </li>
-                        <li >
-                            <a href="{{ route('doc') }}">
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <div class="icon">
-                                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                                    <i class="fa fa-cube" aria-hidden="true"></i>
                                 </div>
-                                <div class="title">Documentation</div>
+                                <div class="title">Products</div>
                             </a>
+                            <div class="dropdown-menu">
+                                <ul>
+                                    <li><a href="{{ url($projectName.'/products/create') }}">Add Products</a></li>
+                                    <li><a href="{{ url($projectName.'/products') }}">View Products</a></li>
+                                </ul>
+                            </div>
                         </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <div class="icon">
+                                    <i class="fa fa-cube" aria-hidden="true"></i>
+                                </div>
+                                <div class="title">Categories</div>
+                            </a>
+                            <div class="dropdown-menu">
+                                <ul>
+                                    <li><a href="{{ url($projectName.'/products/create') }}">Add Categories</a></li>
+                                    <li><a href="{{ url($projectName.'/products') }}">View Cataegories</a></li>
+                                 
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <div class="icon">
+                                    <i class="fa fa-cube" aria-hidden="true"></i>
+                                </div>
+                                <div class="title">Brands</div>
+                            </a>
+                            <div class="dropdown-menu">
+                                <ul>
+                                    <li><a href="{{ url($projectName.'/products/create') }}">Add Brands</a></li>
+                                    <li><a href="{{ url($projectName.'/products') }}">View Brands</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
                     </ul>
                 </div>
                 <div class="sidebar-footer">
@@ -83,8 +119,8 @@
                                 </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-left">
-                                <li class="dropdown ">
-                                    
+                                <li class="dropdown "> 
+                              
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         
                                         <div class="title"> {{$projectName}} <i class="fa fa-sort-down" aria-hidden="true"></i></div>
@@ -104,18 +140,17 @@
                                                 </a>
                                             </li>
                                             @endforeach
-                                            
-                                            
                                             <li class="dropdown-footer">
-                                                <a href="{{ route('overview') }}">View All <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <a href="{{route('overview')}}">View All <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                                             </li>
                                         </ul>
                                     </div>
-                                    
+                                
                                 </li>
-                                <li><a href="{{ url('setting') }}"> Setting</a></li>
+                                <li><a href="{{ url($projectName.'/setting') }}"> Setting</a></li>
                                 <li><a href="{{ url($projectName.'/manage') }}"> Manage</a></li>
                             </ul>
+
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown notification warning">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

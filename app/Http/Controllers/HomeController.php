@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UserApps;
+use View;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -21,8 +24,30 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function project($projectName)
     {
-        return view('home');
+        if (!$projectName) {
+            return redirect('/overview');
+        }
+        view()->share('projectName', $projectName);
+
+        return view('home', compact('projectName'));
     }
+    public function manage($projectName)
+    {
+
+        return view('products/chart', compact('projectName'));
+    }
+    public function landing()
+    {
+        $apps = UserApps::all()->where('user_id', Auth::id());
+        // print_r($apps);
+        return view('home-landing', compact('apps'));
+    }
+    public function price()
+    {
+      
+        return view('price');
+    }
+
 }

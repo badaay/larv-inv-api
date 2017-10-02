@@ -4,7 +4,10 @@
 
 
 .app.app-red aside.app-sidebar {
-  background-color: #FFF; }
+  background-color: #1d0c07; 
+  /*border-right: 5px solid;
+    border-right-color: #E74C3C;*/
+}
   .app.app-red aside.app-sidebar .sidebar-header .sidebar-brand .highlight {
     background-color: #E74C3C; }
   .app.app-red aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .icon {
@@ -23,12 +26,16 @@
     border-right-color: #FFF; }
   .app.app-red aside.app-sidebar .sidebar-footer {
     border-top-color: rgba(0, 0, 0, 0.1);
-    background-color: #FFF; }
+    background-color: #1d0c07; }
     .app.app-red aside.app-sidebar .sidebar-footer ul.menu > li.dropdown .dropdown-menu {
       border-bottom-color: #E74C3C; }
 
 .app.app-red .navbar .navbar-header .navbar-brand .highlight, .app.app-red .navbar .navbar-mobile .navbar-brand .highlight {
   background-color: #E74C3C; }
+
+.app.app-red .navbar .navbar-collapse {
+  border-bottom: 5px solid;
+  border-bottom-color: #e74c3c; }
 
 .app.app-red .ct-series-a .ct-bar, .app.app-red .ct-series-a .ct-line, .app.app-red .ct-series-a .ct-point {
   stroke: #E74C3C; }

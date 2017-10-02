@@ -17,6 +17,11 @@ class UserVendor extends Authenticatable implements HasRoleContract
         'name',
         'email',
         'password',
+        'address',
+        'phone',
+		'phone_other',
+		'verification_code',
+		'verification_status',
 
     ];
 

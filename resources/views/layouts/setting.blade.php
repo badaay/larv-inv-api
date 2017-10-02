@@ -10,13 +10,25 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/flat-admin.css') }}">
         <!-- Theme -->
-        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/blue-sky.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/blue.css') }}"> -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/red.css') }}">
+        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/blue-sky.css') }}"> -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/blue.css') }}">
+        <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/red.css') }}"> -->
         <!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme/yellow.css') }}"> -->
+        <style type="text/css">
+            
+            code .token {
+                padding: 2px 4px;
+                font-size: 90%;
+                color: #333;
+                background-color: #eee;
+                border-radius: 4px;
+                display: block;
+                word-wrap: break-word;
+            }
+        </style>
     </head>
     <body>
-        <div class="app app-red">
+        <div class="app app-default">
             <aside class="app-sidebar" id="sidebar">
                 <div class="sidebar-header">
                     <a class="sidebar-brand" href="#"><span class="highlight">{{ config('app.name') }}</span> Admin</a>
@@ -27,19 +39,11 @@
                 <div class="sidebar-menu">
                     <ul class="sidebar-nav">
                         <li class="active">
-                            <a href="{{ route('overview') }}">
-                                <div class="icon">
-                                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                            <a href="{{ url('setting/profile')}}">
+                                <div class="icon
+                                    <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
-                                <div class="title">Dashboard</div>
-                            </a>
-                        </li>
-                        <li >
-                            <a href="{{ route('doc') }}">
-                                <div class="icon">
-                                    <i class="fa fa-cogs" aria-hidden="true"></i>
-                                </div>
-                                <div class="title">Documentation</div>
+                                <div class="title">Profile</div>
                             </a>
                         </li>
                     </ul>
@@ -87,7 +91,7 @@
                                     
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         
-                                        <div class="title"> {{$projectName}} <i class="fa fa-sort-down" aria-hidden="true"></i></div>
+                                        <div class="title"> Choose Project <i class="fa fa-sort-down" aria-hidden="true"></i></div>
                                         <!-- <div class="icon"></div> -->
                                         <!-- <div class="count">99</div> -->
                                     </a>
@@ -113,8 +117,7 @@
                                     </div>
                                     
                                 </li>
-                                <li><a href="{{ url('setting') }}"> Setting</a></li>
-                                <li><a href="{{ url($projectName.'/manage') }}"> Manage</a></li>
+                           
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown notification warning">
@@ -207,7 +210,7 @@
                                     </div>
                                 </li>
                                 <li class="dropdown profile">
-                                    <a href="/html/pages/profile.html" class="dropdown-toggle"  data-toggle="dropdown">
+                                    <a href="{{ url('setting/profile')}}" class="dropdown-toggle"  data-toggle="dropdown">
                                         <img class="profile-img" src="{{ asset('images/profile.png') }}">
                                         <div class="title">Profile</div>
                                     </a>
@@ -217,7 +220,7 @@
                                         </div>
                                         <ul class="action">
                                             <li>
-                                                <a href="#">
+                                                <a href=" {{ url('setting/profile')}} ">
                                                     Profile
                                                 </a>
                                             </li>

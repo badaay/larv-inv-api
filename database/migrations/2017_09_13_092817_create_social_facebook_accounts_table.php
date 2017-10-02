@@ -13,6 +13,7 @@ class CreateSocialFacebookAccountsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('social_facebook_accounts');
         Schema::create('social_facebook_accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();

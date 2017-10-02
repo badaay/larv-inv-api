@@ -30,6 +30,10 @@
 .app.app-yellow .navbar .navbar-header .navbar-brand .highlight, .app.app-yellow .navbar .navbar-mobile .navbar-brand .highlight {
   background-color: #FFBC11; }
 
+.app.app-yellow .navbar .navbar-collapse {
+  border-bottom: 5px solid;
+  border-bottom-color: #FFBC11; }
+
 .app.app-yellow .ct-series-a .ct-bar, .app.app-yellow .ct-series-a .ct-line, .app.app-yellow .ct-series-a .ct-point {
   stroke: #FFBC11; }
 

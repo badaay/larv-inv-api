@@ -4,7 +4,8 @@
 
 
 .app.app-blue aside.app-sidebar {
-  background-color: #FFF; }
+  background-color: #0c1621; 
+}
   .app.app-blue aside.app-sidebar .sidebar-header .sidebar-brand .highlight {
     background-color: #095077; }
   .app.app-blue aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .icon {
@@ -23,12 +24,16 @@
     border-right-color: #FFF; }
   .app.app-blue aside.app-sidebar .sidebar-footer {
     border-top-color: rgba(0, 0, 0, 0.1);
-    background-color: #FFF; }
+    background-color: #0c1621; }
     .app.app-blue aside.app-sidebar .sidebar-footer ul.menu > li.dropdown .dropdown-menu {
       border-bottom-color: #095077; }
 
 .app.app-blue .navbar .navbar-header .navbar-brand .highlight, .app.app-blue .navbar .navbar-mobile .navbar-brand .highlight {
   background-color: #095077; }
+
+.app.app-blue .navbar .navbar-collapse {
+  border-bottom: 5px solid;
+  border-bottom-color: #095077; }
 
 .app.app-blue .ct-series-a .ct-bar, .app.app-blue .ct-series-a .ct-line, .app.app-blue .ct-series-a .ct-point {
   stroke: #095077; }

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
+// use JWTFactory;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthenticateController extends Controller
@@ -29,7 +30,8 @@ class AuthenticateController extends Controller
 
     public function makeToken(Request $request){
 
-        $credentials = $request->only('email', 'password');
+        // $credentials = $request->only('email', 'password');
+        $credentials = ['my'=>'wow', 'jos'=>'myne'];
 
         $payload = JWTFactory::make($credentials);
 

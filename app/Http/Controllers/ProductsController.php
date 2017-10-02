@@ -5,18 +5,30 @@ namespace App\Http\Controllers;
 use App\Products;
 use App\ProductsStock as Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Excel;
+use DB;
 
 
 class ProductsController extends Controller
 {
+    
+    function __construct(){
+       
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($projectName)
     {
         //
+
+        $products = Products::all();
+        
+        return view('products/view-products', compact('products', 'projectName'));
+            
     }
 
     /**
@@ -24,9 +36,59 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($projectName, $upload = NULL)
     {
-        
+       
+        return view('products/add-products', compact('projectName', 'upload'));
+
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create_from_excel($projectName, Request $request)
+    {
+        if($request->hasFile('import_file')){
+            $path = $request->file('import_file')->getRealPath();
+
+            $data = Excel::load($path, function($reader) {})->get();
+
+            if(!empty($data) && $data->count()){
+
+                foreach ($data->toArray() as $key => $value) {
+                    if(!empty($value)){
+                        // print_r($value);
+                        // foreach ($value as $v) {        
+                            $insert[] = 
+                            [
+                                'name' => $value['name'], 
+                                'sku' => $value['sku'], 
+                                'weight' => $value['weight'], 
+                                'buy_price' => $value['buy_price'], 
+                                'sell_price' => $value['sell_price'], 
+                                'stock' => $value['stock'], 
+                                'description' => $value['description']
+                            ];
+                        // }
+                    }
+                }
+
+                
+                if(!empty($insert)){
+                    
+                    // $products = Products::all();
+                    // $upload = $insert;
+                    // return view('products/view-products', compact('products', 'projectName', 'upload'));
+                    return $this->create($projectName, $insert);
+                   
+                }
+
+            }
+
+        }
+        // return Response()->json($request);
+        return back()->with('error','Please Check your file, Something is wrong there.');
     }
 
     /**
@@ -39,6 +101,32 @@ class ProductsController extends Controller
     {
         //
         return Products::create($request->all());
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store_from_excel(Request $request)
+    {
+        //
+        // echo(json_decode($request->all(), true));
+        $data = [];
+        $checkbox = $request->json()->all();
+        foreach ($checkbox as $key => $value) {
+            if ($value) {
+                $value['invento_vendor_id'] = Auth::id();
+                // $value['created_at'] = date('Y-m-d h:i:s');
+                // $value['updated_at'] = date('Y-m-d h:i:s');
+                 $data[] = $value;
+            }
+          
+        }
+        print_r($data);
+        // return Products::create($request->all());
+        DB::table('invento_products')->insert($data);
+
     }
 
     /**

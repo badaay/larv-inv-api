@@ -31,10 +31,15 @@ class SettingController extends Controller
     {
         //
         $apps = UserApps::all()->where('user_id', Auth::id());
-        $user = (array)  UserVendor::find( Auth::id()) ;
-        $payload = JWTFactory::make($user);
-        $token = JWTAuth::encode($payload);
+        $user = UserVendor::find( Auth::id()) ;
+        // $user->app = $apps;
+        $token = JWTAuth::fromUser($user);
+        // $token = JWTAuth::encode($payload);
         return view('setting/form', compact('apps', 'token'));
+    }
+
+    public function profile(){
+        return view('setting/profile');
     }
 
     /**

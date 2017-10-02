@@ -1,11 +1,12 @@
-@extends('layouts.dashboard')
+@extends('layouts.manage')
+
 @section('content')
 <div class="row">
   <div class="col-xs-12">
     <div class="card card-banner card-chart card-green no-br">
       <div class="card-header">
         <div class="card-title">
-          <div class="title">Register Your App first</div>
+          <div class="title">Activity</div>
         </div>
         <ul class="card-action">
           <li>
@@ -23,7 +24,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <div class="card">
+    <div class="card card-banner card-chart card-green no-br">
       <div class="card-header">
         <div class="card-title">
           <div class="title">Top Sale Today</div>
@@ -37,107 +38,52 @@
         </ul>
       </div>
       <div class="card-body">
-        <div class="section">
-          <div class="section-title">Step</div>
-          <div class="section-body">
-            <div class="step">
-              <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="step">
-                  <a href="#step1" id="step1-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
-                    <div class="icon fa fa-shopping-cart"></div>
-                    <div class="heading">
-                      <div class="title">Shipping</div>
-                      <div class="description">Enter your address</div>
-                    </div>
-                  </a>
-                </li>
-                <li role="step" class="active">
-                  <a href="#step2" role="tab" id="step2-tab" data-toggle="tab" aria-controls="profile">
-                    <div class="icon fa fa-credit-card"></div>
-                    <div class="heading">
-                      <div class="title">Payment</div>
-                      <div class="description">Billing Information.</div>
-                    </div>
-                  </a>
-                </li>
-                <li role="step">
-                  <a href="#step3" role="tab" id="step3-tab" data-toggle="tab" aria-controls="profile">
-                    <div class="icon fa fa-check"></div>
-                    <div class="heading">
-                      <div class="title">Confirm Orders</div>
-                      <div class="description">Confirmation your purchases</div>
-                    </div>
-                  </a>
-                </li>
-                <li role="step">
-                  <a href="#step4" role="tab" id="step4-tab" data-toggle="tab" aria-controls="profile">
-                    <div class="icon fa fa-truck "></div>
-                    <div class="heading">
-                      <div class="title">Purchase Successfully</div>
-                      <div class="description">Wait for us shipping</div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <div role="tabpanel" class="tab-pane" id="step1">
-                  <b>Step1</b> : Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
-                </div>
-                <div role="tabpanel" class="tab-pane active" id="step2">
-                  <b>Step2</b> : Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
-                </div>
-                <div role="tabpanel" class="tab-pane" id="step3">
-                  <b>Step3</b> : Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                </div>
-                <div role="tabpanel" class="tab-pane" id="step4">
-                  <b>Step4</b> : Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequa
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="ct-chart-sale"></div>
       </div>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-    <a class="card card-banner card-green-light">
-      <div class="card-body">
-        <i class="icon fa fa-shopping-basket fa-4x"></i>
-        <div class="content">
-          <div class="title">Sale Today</div>
-          <div class="value"><span class="sign">$</span>420</div>
-        </div>
-      </div>
-    </a>
+      <a class="card card-banner card-green-light">
+  <div class="card-body">
+    <i class="icon fa fa-shopping-basket fa-4x"></i>
+    <div class="content">
+      <div class="title">Sale Today</div>
+      <div class="value"><span class="sign">$</span>420</div>
+    </div>
+  </div>
+</a>
+
   </div>
   <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-    <a class="card card-banner card-blue-light">
-      <div class="card-body">
-        <i class="icon fa fa-thumbs-o-up fa-4x"></i>
-        <div class="content">
-          <div class="title">Page Likes</div>
-          <div class="value"><span class="sign"></span>2453</div>
-        </div>
-      </div>
-    </a>
+      <a class="card card-banner card-blue-light">
+  <div class="card-body">
+    <i class="icon fa fa-thumbs-o-up fa-4x"></i>
+    <div class="content">
+      <div class="title">Page Likes</div>
+      <div class="value"><span class="sign"></span>2453</div>
+    </div>
+  </div>
+</a>
+
   </div>
   <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-    <a class="card card-banner card-yellow-light">
-      <div class="card-body">
-        <i class="icon fa fa-user-plus fa-4x"></i>
-        <div class="content">
-          <div class="title">New Registration</div>
-          <div class="value"><span class="sign"></span>50</div>
-        </div>
-      </div>
-    </a>
+      <a class="card card-banner card-yellow-light">
+  <div class="card-body">
+    <i class="icon fa fa-user-plus fa-4x"></i>
+    <div class="content">
+      <div class="title">New Registration</div>
+      <div class="value"><span class="sign"></span>50</div>
+    </div>
+  </div>
+</a>
+
   </div>
 </div>
+
 <div class="row">
-  <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
     <div class="card card-mini">
       <div class="card-header">
         <div class="card-title">Last Statuses</div>
@@ -193,7 +139,8 @@
         </table>
       </div>
     </div>
-  </div> -->
+  </div>
+
   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
     <div class="card card-tab card-mini">
       <div class="card-header">
