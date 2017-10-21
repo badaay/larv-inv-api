@@ -14,9 +14,10 @@ class CreateTableUserApps extends Migration
     public function up()
     {
         //
+        Schema::dropIfExists('invento_products');
         Schema::dropIfExists('invento_user_apps');
 
-         Schema::create('invento_user_apps', function (Blueprint $table) {
+        Schema::create('invento_user_apps', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('invento_user_vendor')->onDelete('cascade');

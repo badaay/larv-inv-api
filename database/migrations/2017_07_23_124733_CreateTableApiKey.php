@@ -14,7 +14,7 @@ class CreateTableApiKey extends Migration
     public function up()
     {
         //
-        Schema::drop('invento_apikey');
+        Schema::dropIfExists('invento_apikey');
         Schema::create('invento_apikey', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();

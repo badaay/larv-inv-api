@@ -14,7 +14,8 @@ class CreateTableUserVendor extends Migration
     public function up()
     {
         //
-
+        Schema::dropIfExists('invento_products');
+        Schema::dropIfExists('invento_user_apps');
         Schema::dropIfExists('invento_user_vendor');
          Schema::create('invento_user_vendor', function (Blueprint $table) {
             $table->increments('id');

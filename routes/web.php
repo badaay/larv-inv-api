@@ -11,6 +11,54 @@
 |
 */
 
+Route::post('login_success', function() {
+    //
+
+    // Initialize variables
+    $app_id = '1412798915422551';
+    $secret = '7440c3f73248a13290d907a36ebba04e';
+    $version = 'v2.10'; // 'v1.1' for example
+
+    $code = '';
+      
+   
+
+    // Exchange authorization code for access token
+    $token_exchange_url = 'https://graph.accountkit.com/'.$version.'/access_token?'.
+      'grant_type=authorization_code'.
+      '&code='.$code.
+      "&access_token=AA|$app_id|$secret";
+      echo $token_exchange_url;
+      echo '<br>';
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $token_exchange_url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $data = json_decode(curl_exec($ch), true);
+
+      print_r($data);
+      // curl_close($ch);
+    // $data = doCurl($token_exchange_url);
+    // $user_id = $data['id'];
+    // $user_access_token = $data['access_token'];
+    // $refresh_interval = $data['token_refresh_interval_sec'];
+
+    // Get Account Kit information
+    // $me_endpoint_url = 'https://graph.accountkit.com/'.$version.'/me?'.
+    //   'access_token='.$user_access_token;
+
+    // $ch = curl_init();
+    //   curl_setopt($ch, CURLOPT_URL, $me_endpoint_url);
+    //   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //   $data = json_decode(curl_exec($ch), true);
+    // curl_close($ch);
+    // $data = doCurl($me_endpoint_url);
+    // $phone = isset($data['phone']) ? $data['phone']['number'] : '';
+    // $email = isset($data['email']) ? $data['email']['address'] : '';
+
+
+
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -40,11 +88,11 @@ Route::group(['prefix' => '{projectName}', 'middleware' => 'auth'], function(){
     Route::get('/overview', 'HomeController@project')->name('project');
 
     Route::get('/manage', 'HomeController@manage');
-    Route::resource('/products', 'ProductsController');
     Route::post('/products/importExcel', 'ProductsController@create_from_excel');
+    Route::resource('/products', 'ProductsController');
+    // Route::get('/products/view/{trash}', 'ProductsController@view');
     // Route::resource('/products', 'ProductsController');
     // Route::post('/products', 'ProductsController@store');
-    // Route::get('/products/view/{trash}', 'ProductsController@view');
     // Route::put('/products/stok/{id}', 'ProductsController@insert_stock');
 
     // Route::resource('/brands', 'BrandsController');
@@ -92,3 +140,23 @@ Route::get('/faker', function(){
     }
     return $data;
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    //Login Routes...
+    Route::get('/login','admin\AuthController@showLoginForm');
+    Route::post('/login','admin\AuthController@authenticate');
+    Route::get('/logout','admin\AuthController@logout');
+
+    // Registration Routes...
+    Route::get('/register', 'admin\AuthController@showRegistrationForm');
+    Route::post('/register', 'admin\Auth\RegisterController@register');
+
+});  
+Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
+    //Login Routes...
+
+
+    Route::resource('home', 'admin\AdminController');
+    Route::resource('dashboard', 'admin\DashboardController');
+});  
