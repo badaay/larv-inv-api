@@ -159,4 +159,5 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
 
     Route::resource('home', 'admin\AdminController');
     Route::resource('dashboard', 'admin\DashboardController');
+    Route::resource('doc', 'admin\DocumentationController');
 });  

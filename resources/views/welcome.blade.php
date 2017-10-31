@@ -136,6 +136,19 @@
         });
           
         FB.AppEvents.logPageView();   
+
+        FB.api(
+          "/685088238350948/feed",
+          "POST",
+          {
+              "message": "This is a test message"
+          },
+          function (response) {
+            if (response && !response.error) {
+              /* handle the result */
+            }
+          }
+      );
           
       };
 

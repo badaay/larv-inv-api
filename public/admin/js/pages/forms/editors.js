@@ -1,7 +1,7 @@
 $(function () {
     //CKEditor
-    CKEDITOR.replace('ckeditor');
-    CKEDITOR.config.height = 300;
+    // CKEDITOR.replace('ckeditor');
+    // CKEDITOR.config.height = 300;
 
     //TinyMCE
     tinymce.init({
@@ -19,5 +19,5 @@ $(function () {
         image_advtab: true
     });
     tinymce.suffix = ".min";
-    tinyMCE.baseURL = '../../plugins/tinymce';
+    tinyMCE.baseURL = 'http://api-dashboard.dev/admin/plugins/tinymce';
 });
