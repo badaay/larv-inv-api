@@ -19,7 +19,8 @@ class CreateTableProductsStock extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('invento_products_id')->unsigned();
-            $table->integer('invento_user_vendor')->nullable();
+            $table->string('apps_name');
+            $table->foreign('apps_name')->references('name')->on('invento_user_apps')->onDelete('cascade');
             $table->integer('stock_in')->default(0);
             $table->integer('stock_out')->default(0);
             $table->string('description')->nullable();

@@ -19,9 +19,6 @@ class CreateTableUserVendor extends Migration
         Schema::dropIfExists('invento_user_vendor');
          Schema::create('invento_user_vendor', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->softDeletes();
-            $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('verification_code')->nullable();
@@ -30,6 +27,10 @@ class CreateTableUserVendor extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('phone_other')->nullable();
+            $table->string('name');
+            $table->string('server_key');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

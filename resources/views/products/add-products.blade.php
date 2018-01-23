@@ -24,6 +24,7 @@
               <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">From Excel</a></li>
                   <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">input Manually</a></li>
+                  <li role="presentation"><a href="#api" aria-controls="api" role="tab" data-toggle="tab">API Usage</a></li>
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
@@ -81,6 +82,20 @@
                                   </div>
                                 </div>
                               </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="api">
+                      <div class="card setting" id="tambah" >
+                        <div class="card-body">
+                          
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                             <pre><code class="php"> 
+                    curl -u 67287:lXymG93y83m6RHzZV5FY "https://api.bukalapak.com/v2/products/kxvi.json" -H "Content-Type: application/json" -X GET
+                                </code></pre>
                             </div>
                           </div>
                         </div>

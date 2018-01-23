@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'secret' => env('JWT_SECRET', 'iJ1okkwmb82hpD4ZOeXynMPsLBm4mdSz'),
+    'secret' => env('JWT_SECRET', 'mCEGymxalqaUHXFiDYAIoCqCQLFQBkAd'),
 
     /*
     |--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'user' => 'App\UserVendor',
+    'user' => 'App\UserKey',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'identifier' => 'id',
+    'identifier' => 'id_user_vendor',
 
     /*
     |--------------------------------------------------------------------------

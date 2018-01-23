@@ -67,11 +67,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $userRole = \HttpOz\Roles\Models\Role::whereSlug('user.apis')->first();
+        $key = substr(md5( $data['name']), 0, 5).substr (md5( $data['email'] ),0, 5).substr(md5( $data['password'] ),0, 5);
         $user = UserVendor::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'verification_code' => md5(uniqid()),
+            'server_key' => substr( md5($key) ,0, 15),
         ]);
         $user->attachRole($userRole);
         // $user->notify(new NewUser('A new user was registered'));

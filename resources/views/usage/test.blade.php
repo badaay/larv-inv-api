@@ -1,5 +1,53 @@
 @extends('layouts.dashboard-no-sidebar')
 @section('content')
+<div id="lihat">
+  <div style="padding: 10px;" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <a class="card card-banner card-green-light" id="setting-add">
+        <div class="card-body">
+          <i class="icon fa fa-plus fa-4x"></i>
+          <div class="content">
+            <div class="title"> Product </div>
+            <div class="value"><span class="sign"></span></div>
+          </div>
+        </div>
+      </a>
+  </div>
+  <div style="padding: 10px;" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <a class="card card-banner card-green-light" id="setting-add">
+        <div class="card-body">
+          <i class="icon fa fa-plus fa-4x"></i>
+          <div class="content">
+            <div class="title"> Suppliers </div>
+            <div class="value"><span class="sign"></span></div>
+          </div>
+        </div>
+      </a>
+  </div>
+  <div style="padding: 10px;" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <a class="card card-banner card-green-light" id="setting-add">
+        <div class="card-body">
+          <i class="icon fa fa-plus fa-4x"></i>
+          <div class="content">
+            <div class="title"> Transaction </div>
+            <div class="value"><span class="sign"></span></div>
+          </div>
+        </div>
+      </a>
+  </div>
+  <div style="padding: 10px;" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <a class="card card-banner card-green-light" id="setting-add">
+        <div class="card-body">
+          <i class="icon fa fa-plus fa-4x"></i>
+          <div class="content">
+            <div class="title"> Trash </div>
+            <div class="value"><span class="sign"></span></div>
+          </div>
+        </div>
+      </a>
+  </div>
+</div>
+@endsection
+@section('content1')
 <div class="row">
   <div class="col-lg-12" style="padding: 0px;">
     <div class="col-md-3 col-lg-3 col-sm-12">
@@ -25,7 +73,7 @@
             <a href="#" class="list-group-item">
               View Brands
             </a>
-            
+
           </div>
         </div>
       </div>
@@ -92,7 +140,7 @@
                     </tr>
 
                   </tbody>
-                  
+
                 </table>
               </ul>
               <!-- <ul>Required:</ul> -->
@@ -125,7 +173,7 @@
                 <!-- <div class="col-lg-12">
                   <div class="card" >
                     <div class="card-body">
-                      
+
                       <div class="row">
                         <div class="col-md-12 col-sm-12"> -->
                           <!-- <div class="section"> -->
@@ -137,12 +185,12 @@
                             </ul>
                             <div class="tab-content">
                               <div role="tabpanel" class="tab-pane active" id="home">
-                                <pre><code class="php"> 
+                                <pre><code class="php">
                     curl -u 67287:lXymG93y83m6RHzZV5FY "https://api.bukalapak.com/v2/products/kxvi.json" -H "Content-Type: application/json" -X GET
                                 </code></pre>
                               </div>
                               <div role="tabpanel" class="tab-pane" id="profile">
-                                  <pre><code class="javascript"> 
+                                  <pre><code class="javascript">
                      $.post('application', $value, function(data, textStatus, xhr){
                           console.log(data);
                           console.log(textStatus);
@@ -157,7 +205,7 @@
                       url : "application",
                       data: $value,
                       error:function() { alert("Error Submitting Information") }
-                      
+
                     }).done(function(msg){
                           alert(msg);
                         });
@@ -166,7 +214,7 @@
                             <!--   <div role="tabpanel" class="tab-pane" id="messages">
                               </div>
                               <div role="tabpanel" class="tab-pane" id="settings"> -->
-                                
+
                               </div>
                             <!-- </div> -->
                          <!--  </div>

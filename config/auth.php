@@ -50,8 +50,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
+            'driver' => 'session',
+            'provider' => 'api',
         ],
     ],
 
@@ -82,10 +82,10 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'api' => [
+            'driver' => 'eloquent',
+            'model' => App\UserKey::class,
+        ],
     ],
 
     /*

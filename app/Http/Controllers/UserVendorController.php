@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\UserVendor;
 use App\UserApps;
+use App\UserKey;
 use App\ApiKey;
 use Illuminate\Http\Request;
 // use App\Http\Controllers\Auth;
@@ -18,7 +19,7 @@ class UserVendorController extends Controller
      */
     public function index()
     {
-       
+
     }
 
     /**
@@ -48,6 +49,12 @@ class UserVendorController extends Controller
         $apps->app_key = substr(md5('invento'),0, 5).substr(md5($request->name),0, 5).substr(md5($request->_token.uniqid()), 15);
         $apps->tipe = $request->type;
         $apps->save();
+
+        // $userkey = new UserKey;
+        // $userkey->id_user_vendor = Auth::id();
+        // $userkey->server_key = substr(md5($apps->app_key),0, 5).substr(md5($request->name),0, 5).substr(md5($request->_token.uniqid()), 15);
+        // $userkey->project_key = $apps->app_key;
+        // $userkey->save();
         return $apps;
     }
 
