@@ -44,6 +44,17 @@ Response body:
 
 Example: http://api-dashboard.dev/api/(project-name)/products
 
+Data : 
+
+	{
+		name 		: "book",
+		weight 		: "12",
+		sell_price	: "25000",
+		buy_price	: "20000",
+		description	: "some description",
+		stock		: 200 //initial stok if exist
+	}
+	
 Response body:
 
     {
@@ -62,7 +73,8 @@ Data :
 		weight 		: "12",
 		sell_price	: "25000",
 		buy_price	: "20000",
-		description	: "some description"
+		description	: "some description",
+		stock		: 200 //initial stok if exist
 	}
 
 Response body:
@@ -76,16 +88,6 @@ Response body:
 
 Example: http://api-dashboard.dev/api/(project-name)/products/(id)
 
-Data : 
-
-	{
-		name 		: "book",
-		weight 		: "12",
-		sell_price	: "25000",
-		buy_price	: "20000",
-		description	: "some description"
-	}
-	
 Response body:
 
     {
